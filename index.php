@@ -17,6 +17,26 @@ $y = 4;
 echo "<h2>" . $txt1 . "</h2>";
 echo "Study PHP at " . $txt2 . "<br>";
 echo $x + $y;
+
+// Create connection
+$conn = pg_connect(getenv("DATABASE_URL"));
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+
+$sql = "SELECT id,name from label";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo "id: " . $row["id"]. " - Name: " . $row["name"] .  "<br>";
+    }
+} else {
+    echo "0 results";
+}
+$conn->close();
 ?>
 
 </body>
