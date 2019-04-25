@@ -26,17 +26,22 @@ if ($conn->connect_error) {
 echo "Connected successfully";
 $sql = "SELECT id, name FROM label";
 
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-        echo "id: " . $row["id"];
-    }
-} else {
-    echo "0 results";
+try {
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+    	// output data of each row
+    	while($row = $result->fetch_assoc()) {
+        	echo "id: " . $row["id"];
+    	}
+	} else {
+    	echo "0 results";
+	}	
+	conn->close();
 }
-$conn->close();
+catch (Exception $e) {
+    echo $e->getMessage();
+}
+
 ?>
 </body>
 </html>
