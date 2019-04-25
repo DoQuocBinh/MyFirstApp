@@ -12,7 +12,7 @@ echo "Hello abc XYZ!";
 $txt1 = "Learn PHP";
 $txt2 = "FPT Greenwich";
 $x = 5;
-$y = 5;
+$y = 6;
 
 echo "<h2>" . $txt1 . "</h2>";
 echo "Study PHP at " . $txt2 . "<br>";
