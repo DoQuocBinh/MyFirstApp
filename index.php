@@ -18,27 +18,28 @@ echo "<h2>" . $txt1 . "</h2>";
 echo "Study PHP at " . $txt2 . "<br>";
 echo $x + $y;
 
-// Create connection
-$conn = pg_connect(getenv("DATABASE_URL"));
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
-echo "Connected successfully";
+ 
 $sql = "SELECT id, name FROM label";
 
-try {
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-    	while($row = $result->fetch_assoc()) {
-        	echo "id: " . $row["id"];
-    	}
-	} else {
-    	echo "0 results";
-	}	
-	$conn->close();
-}
-catch (Exception $e) {
-    echo $e->getMessage();
+$db = parse_url(getenv("DATABASE_URL"));
+
+$pdo = new PDO("pgsql:" . sprintf(
+    "host=%s;port=%s;user=%s;password=%s;dbname=%s",
+    $db["host"],
+    $db["port"],
+    $db["user"],
+    $db["pass"],
+    ltrim($db["path"], "/")
+));
+
+$stmt = $db->prepare($sql);
+//Thiết lập kiểu dữ liệu trả về
+$stmt->setFetchMode(PDO::FETCH_ASSOC);
+$stmt->execute();
+$resultSet = $stmt->fetchAll();
+
+foreach ($resultSet as $row) {
+	echo $row['name'] . '\n';
 }
 
 ?>
