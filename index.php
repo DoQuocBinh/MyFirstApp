@@ -26,18 +26,17 @@ if ($conn->connect_error) {
 echo "Connected successfully";
 $sql = "SELECT id, name FROM label";
 
-$result = mysql_query($sql, $conn);
+$result = $conn->query($sql);
 
-if (!$result) {
-    echo "DB Error, could not query the database\n";
-    echo 'MySQL Error: ' . mysql_error();
-    exit;
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo "id: " . $row["id"];
+    }
+} else {
+    echo "0 results";
 }
-while ($row = mysql_fetch_assoc($result)) {
-    echo $row['name'];
-}
-
-mysql_free_result($result);
+$conn->close();
 ?>
 </body>
 </html>
