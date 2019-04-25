@@ -18,8 +18,10 @@ echo "<h2>" . $txt1 . "</h2>";
 echo "Study PHP at " . $txt2 . "<br>";
 echo $x + $y;
 
+echo getenv("DATABASE_URL");
 // Create connection
 $conn = pg_connect(getenv("DATABASE_URL"));
+
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
