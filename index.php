@@ -29,14 +29,13 @@ $sql = "SELECT id, name FROM label";
 try {
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
-    	// output data of each row
     	while($row = $result->fetch_assoc()) {
         	echo "id: " . $row["id"];
     	}
 	} else {
     	echo "0 results";
 	}	
-	conn->close();
+	$conn->close();
 }
 catch (Exception $e) {
     echo $e->getMessage();
