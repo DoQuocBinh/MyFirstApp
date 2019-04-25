@@ -12,14 +12,14 @@ echo "Hello abc XYZ!";
 $txt1 = "Learn PHP";
 $txt2 = "FPT Greenwich";
 $x = 5;
-$y = 4;
+$y = 5;
 
 echo "<h2>" . $txt1 . "</h2>";
 echo "Study PHP at " . $txt2 . "<br>";
 echo $x + $y;
 
 // Create connection
-$conn = pg_connect(getenv("postgres://puhtyxjlxdqslr:83febabb899c86fb498d48fc44c86b4c1684a3dfb8b228b865b62c4a6a783460@ec2-23-21-106-241.compute-1.amazonaws.com:5432/d5lj5env91t2ia"));
+$conn = pg_connect(getenv("DATABASE_URL"));
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
