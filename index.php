@@ -20,7 +20,10 @@ echo $x + $y;
 
 // Create connection
 $conn = pg_connect(getenv("DATABASE_URL"));
-
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+echo "Connected successfully";
 ?>
 
 </body>
