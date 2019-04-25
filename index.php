@@ -27,9 +27,9 @@ echo "Connected successfully";
 $sql = "SELECT id, name FROM label";
 
 $val=mysqli_query($conn,$sql); 
-while($r=mysqli_fetch_row($val))
+while($r=mysqli_fetch_assoc($val))
 {
-	echo $r[0]." ".$r[1]."<br/>";
+echo $r['id']." ".$r['name'];
 } 
 ?>
 </body>
